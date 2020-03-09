@@ -7,25 +7,23 @@
 
 // It's guaranteed that a unique mapping will always exist.
 
- function freqAlphabets (s) {
+ function freqAlphabets (numberHashString) {
 
-  const characterNumbers = parseCharacterNumbers(s)
-  const characters = transformNumbers2Chars(characterNumbers)
+  const numbers = parseNumbersFromString(numberHashString)
+  const letters = transformNumbers2Letters(numbers)
 
-  return characters.join('');
+  return letters.join('');
 };
 
-function parseCharacterNumbers (s){
-  const individalNumbers = s.split('');
+function parseNumbersFromString (numberHashString){
+  const individalNumbers = numberHashString.split('');
   const groupedNumbers = [];
 
   for(let i=0; i < individalNumbers.length; i++){
-
     let isTwoDigitNumber = individalNumbers[i+2] == '#' 
     if(isTwoDigitNumber){
       groupedNumbers.push(individalNumbers[i]+individalNumbers[i+1])
-      // Advance two space to cover the second character and the hash tag
-      i += 2
+      i += 2   // Advance two space to cover the second character and the hash tag
     } else {
       groupedNumbers.push(individalNumbers[i])
     }
@@ -33,10 +31,10 @@ function parseCharacterNumbers (s){
   return groupedNumbers
 }
 
-function transformNumbers2Chars(numbers){
-  const startingIndex = 1;   // '1' => 'a'
-  const characterCodeOffset = 'a'.charCodeAt(0) - startingIndex;
+function transformNumbers2Letters(numbers){
+  const indexOfA = 1;   // '1' => 'a'
+  const characterCodeOffset = 'a'.charCodeAt(0) - indexOfA;
   return numbers.map(num => String.fromCharCode(Number(num)+characterCodeOffset))
 }
 
-module.exports = {freqAlphabets, parseCharacterNumbers, transformNumbers2Chars}
+module.exports = {freqAlphabets, parseNumbersFromString, transformNumbers2Letters}

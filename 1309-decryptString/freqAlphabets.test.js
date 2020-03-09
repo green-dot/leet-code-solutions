@@ -1,7 +1,7 @@
 // import freqAlphabets from './freqAlphabets.js/index.js';
 expect = require('chai').expect
 should = require('chai').should()
-const {freqAlphabets, parseCharacterNumbers, transformNumbers2Chars} = require('./freqAlphabets')
+const {freqAlphabets, parseNumbersFromString, transformNumbers2Letters} = require('./freqAlphabets')
 
 var assert = require('assert');
 
@@ -25,42 +25,42 @@ describe('#freqAlphabets()', () =>
   })
 })
 
-describe('#parseCharacterNumbers()', () => {
+describe('#parseNumbersFromString()', () => {
   it('Empty Input String', () => {
-    expect(parseCharacterNumbers('')).to.be.an('array').that.is.empty;
+    expect(parseNumbersFromString('')).to.be.an('array').that.is.empty;
   }),
   it('1', () => {
-    expect(parseCharacterNumbers('1')).to.have.ordered.members(['1']);
+    expect(parseNumbersFromString('1')).to.have.ordered.members(['1']);
   }),
   it('15', () => {
-    expect(parseCharacterNumbers('15')).to.have.ordered.members(['1', '5']);
+    expect(parseNumbersFromString('15')).to.have.ordered.members(['1', '5']);
   }), 
   it('10#', () => {
-    expect(parseCharacterNumbers('10#')).to.have.ordered.members(['10']);
+    expect(parseNumbersFromString('10#')).to.have.ordered.members(['10']);
   }), 
   it('110#26#3', () => {
-    expect(parseCharacterNumbers('110#26#3')).to.have.ordered.members(['1','10', '26', '3']);
+    expect(parseNumbersFromString('110#26#3')).to.have.ordered.members(['1','10', '26', '3']);
   })
 })
 
-describe('#transformNumbers2Chars()', () => {
+describe('#transformNumbers2Letters()', () => {
   it('Empty Input Array', () => {
-    expect(transformNumbers2Chars([])).to.be.an('array').that.is.empty;
+    expect(transformNumbers2Letters([])).to.be.an('array').that.is.empty;
   }),
   it('1', () => {
-    expect(transformNumbers2Chars(['1'])).to.have.ordered.members(['a']);
+    expect(transformNumbers2Letters(['1'])).to.have.ordered.members(['a']);
   }),
   it('15', () => {
-    expect(transformNumbers2Chars(['1', '5'])).to.have.ordered.members(['a', 'e']);
+    expect(transformNumbers2Letters(['1', '5'])).to.have.ordered.members(['a', 'e']);
   }), 
   it('10#', () => {
-    expect(transformNumbers2Chars(['10'])).to.have.ordered.members(['j']);
+    expect(transformNumbers2Letters(['10'])).to.have.ordered.members(['j']);
   }), 
   it('110#', () => {
-    expect(transformNumbers2Chars(['1', '10'])).to.have.ordered.members(['a','j']);
+    expect(transformNumbers2Letters(['1', '10'])).to.have.ordered.members(['a','j']);
   }),
   it('110#26#', () => {
-    expect(transformNumbers2Chars(['1', '10','26'])).to.have.ordered.members(['a','j', 'z']);
+    expect(transformNumbers2Letters(['1', '10','26'])).to.have.ordered.members(['a','j', 'z']);
   })
 
 })
