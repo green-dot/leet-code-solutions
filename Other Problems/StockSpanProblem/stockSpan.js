@@ -1,25 +1,29 @@
 const stockSpan = (prices) => {
   const stack = []
-  const spans = Array(prices.length).fill(null)
+  stack.peek = () => stack[stack.length - 1];
+  const spans = Array(prices.length).fill(null);
 
-  for(let i = prices.length - 1; i >= 0; i --){
-    if(stack.length === 0){
-      stack.push({'value': prices[i], 'ind': i})
-    } else {
-      //remove all lower values, should be <= ?
-      while(stack.length && stack[stack.length-1].value < prices[i]){
-        const price = stack.pop();
-        spans[price.ind] = price.ind - i;
+  for(let currentDay = prices.length - 1; currentDay >= 0;  currentDay--){
+    //remove all lower values, should be <= ?
+    while(stack.length && stack.peek().price < prices[currentDay]){
+      const futureStock = stack.pop();
+      spans[futureStock.day] = futureStock.day - currentDay;
       }
-      stack.push({'value': prices[i], 'ind': i})
-    }
+    stack.push(new StockPrice(prices[currentDay], currentDay))
   }
   // clear stack
-  while(stack.length !== 0){
-    const leftover = stack.pop();
-    spans[leftover.ind] = leftover.ind + 1;
+  while(stack.length){
+    const futureStock = stack.pop();
+    spans[futureStock.day] = futureStock.day + 1;
   }
   return spans
+}
+
+class StockPrice {
+  constructor(price, day){
+    this.price = price;
+    this.day = day;
+  }
 }
 
 module.exports = {stockSpan}
