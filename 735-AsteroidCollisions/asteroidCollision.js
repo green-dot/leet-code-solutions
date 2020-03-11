@@ -27,7 +27,7 @@ const asteroidCollision = (asteroids) => {
       rightMovingAstroids.push(asteroids[i])
     }
   }
-  //reverse and append stack here
+  // reverse and append stack here
   const reverseStack = new Stack();
   while (!rightMovingAstroids.isEmpty()){
     reverseStack.push(rightMovingAstroids.pop())
@@ -35,6 +35,8 @@ const asteroidCollision = (asteroids) => {
   while(!reverseStack.isEmpty()){
     finalAstroidConfig.push(reverseStack.pop())
   }
+  // reverseStack(rightMovingAstroids)
+  // appendStack(finalAstroidConfig, rightMovingAstroids)
 
   return finalAstroidConfig
 }
